@@ -81,8 +81,8 @@ class BaseVBO:
 class CubeVBO(BaseVBO):
     def __init__(self, ctx):
         super().__init__(ctx)
-        self.format = '3f 3f 2f'
-        self.attribs = ['in_position', 'in_normal', 'in_uv']
+        self.format = '3f 2f 3f'
+        self.attribs = ['in_position', 'in_uv', 'in_normal']
 
     def get_vertex_data(self):
         verticies = [(-1, -1, 1), ( 1, -1,  1), (1,  1,  1), (-1, 1,  1),
@@ -114,8 +114,8 @@ class CubeVBO(BaseVBO):
                    (0, -1, 0) * 6]
         normals = np.array(normals, dtype='f4').reshape(36, 3)
 
-        vertex_data = np.hstack([vertex_data, normals])
         vertex_data = np.hstack([vertex_data, tex_coord_data])
+        vertex_data = np.hstack([vertex_data, normals])
         return vertex_data
     
 
@@ -165,8 +165,8 @@ class ModelVBO(BaseVBO):
         Creates a buffer with the vertex data
         """
         
-        vertex_data = self.get_vertex_data()
-        vbo = self.ctx.buffer(vertex_data)
+        self.vertex_data = self.get_vertex_data()
+        vbo = self.ctx.buffer(self.vertex_data)
 
         return vbo
 

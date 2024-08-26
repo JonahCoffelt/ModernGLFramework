@@ -13,7 +13,7 @@ class ShaderHandler:
         self.uniform_attribs = {}
 
         self.programs['default'] = self.load_program('default')
-        self.programs['default_position'] = self.load_program('default_position')
+        self.programs['batch'] = self.load_program('batch')
 
     def load_program(self, name: str='default') -> mgl.Program:
         """

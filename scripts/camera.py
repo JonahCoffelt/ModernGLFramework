@@ -4,10 +4,10 @@ import pygame as pg
 # Camera view constants
 FOV = 50  # Degrees
 NEAR = 0.1
-FAR = 250
+FAR = 350
 
 # Camera movement constants
-SPEED = 50
+SPEED = 150
 SENSITIVITY = 0.15
 
 class Camera:
