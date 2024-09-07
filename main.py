@@ -4,6 +4,7 @@ import moderngl as mgl
 from scripts.project import Project
 import cudart
 
+
 class Engine:
     """
     Instance of python engine. Stores the window, context, and projects
@@ -45,7 +46,7 @@ class Engine:
         # Update time
         self.dt = self.clock.tick() / 1000
         self.time += self.dt
-        pg.display.set_caption(str(round(self.clock.get_fps())))
+        pg.display.set_caption(f"FPS: {round(self.clock.get_fps())} | Objects: {len(self.project.current_scene.object_handler.objects)}")
         # Pygame events
         self.events = pg.event.get()
         self.keys = pg.key.get_pressed()
@@ -86,7 +87,8 @@ class Engine:
         """
 
         # Clear the screen
-        self.ctx.clear(color=(0.08, 0.16, 0.18))
+        # self.ctx.clear(color=(0.08, 0.16, 0.18))
+        self.ctx.clear()
         # Render project
         self.project.render()
         # Flip display buffer

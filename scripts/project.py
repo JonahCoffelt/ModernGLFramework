@@ -1,6 +1,6 @@
 from scripts.scene import Scene
-from scripts.vao_handler import VAOHandler
-from scripts.texture_handler import TextureHandler
+from scripts.render.vao_handler import VAOHandler
+from scripts.render.texture_handler import TextureHandler
 
 class Project:
     """
