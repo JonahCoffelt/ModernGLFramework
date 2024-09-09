@@ -19,19 +19,19 @@ class Project:
         self.current_scene = self.scenes[0]
         self.current_scene.use()
 
-    def update(self) -> None:
+    def update(self, camera=True) -> None:
         """
         Updates the current scene        
         """
 
-        self.current_scene.update()
+        self.current_scene.update(camera)
 
-    def render(self) -> None:
+    def render(self, display=True) -> None:
         """
         Renders the current scene        
         """
 
-        self.current_scene.render()
+        self.current_scene.render(display)
 
     def set_scene(self, scene: str) -> None:
         """

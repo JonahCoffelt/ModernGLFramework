@@ -9,7 +9,10 @@ class VAOHandler:
     def __init__(self, project):
         self.project = project
         self.ctx = self.project.ctx
-    
+        self.frame_texture = None
+        self.depth_texture = None
+        self.framebuffer   = None
+            
         self.shader_handler = ShaderHandler(self.project)
         self.vbo_handler = VBOHandler(self.ctx)
 
@@ -37,9 +40,14 @@ class VAOHandler:
         self.vaos[name] = vao
     
     def generate_framebuffer(self):
+        # Avoid a bad memory leak lmao
+        if self.frame_texture : self.frame_texture.release()
+        if self.depth_texture : self.depth_texture.release()
+        if self.framebuffer   : self.framebuffer.release()
+
         self.frame_texture = self.ctx.texture(self.project.engine.win_size, components=4)
         self.depth_texture = self.ctx.depth_texture(self.project.engine.win_size)
-        self.framebuffer = self.ctx.framebuffer([self.frame_texture], self.depth_texture)
+        self.framebuffer   = self.ctx.framebuffer([self.frame_texture], self.depth_texture)
 
     def release(self):
         """

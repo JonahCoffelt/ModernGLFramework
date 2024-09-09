@@ -148,6 +148,7 @@ class FrameVBO(BaseVBO):
 
 
         vertex_data = np.hstack([vertex_data, tex_coord_data])
+
         return vertex_data
     
 

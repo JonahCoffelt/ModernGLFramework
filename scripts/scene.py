@@ -44,30 +44,30 @@ class Scene:
 
         self.selected_object = self.object_handler.add("cow", "box")
 
-    def use(self):
+    def use(self, camera=True):
         """
         Updates project handlers to use this scene
         """
 
         self.vao_handler.shader_handler.set_camera(self.camera)
-        self.camera.use()
+        if camera: self.camera.use()
         self.vao_handler.generate_framebuffer()
         self.vao_handler.shader_handler.write_all_uniforms()
         self.project.texture_handler.write_textures()
         self.project.texture_handler.write_textures('batch')
         self.light_handler.write('batch')
 
-    def update(self):
+    def update(self, camera=True):
         """
         Updates uniforms, and camera
         """
                 
         self.object_handler.update()
         self.vao_handler.shader_handler.update_uniforms()
-        self.camera.update()
+        if camera: self.camera.update()
 
 
-    def render(self):
+    def render(self, display=True):
         """
         Redners all instances
         """
@@ -75,6 +75,9 @@ class Scene:
         self.vao_handler.framebuffer.clear(color=(0.08, 0.16, 0.18, 1.0))
         self.vao_handler.framebuffer.use()
         self.object_handler.render()
+
+        if not display: return
+
         self.ctx.screen.use()
         self.vao_handler.shader_handler.programs['frame']['screenTexture'] = 0
         self.vao_handler.frame_texture.use(location=0)
